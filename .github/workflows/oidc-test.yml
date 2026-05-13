@@ -1,7 +1,7 @@
 name: AWS OIDC Test
 
 on:
-  workflow_dispatch: # Permite rodar manualmente pelo botão no GitHub
+  workflow_dispatch:
 
 permissions:
   id-token: write
