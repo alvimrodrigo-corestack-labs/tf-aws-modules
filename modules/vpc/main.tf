@@ -77,7 +77,7 @@ locals {
 }
 
 resource "aws_eip" "nat" {
-  count = local.nat_gateway_count
+  count  = local.nat_gateway_count
   domain = "vpc"
 
   tags = merge(var.tags, {
