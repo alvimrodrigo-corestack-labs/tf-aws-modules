@@ -2,11 +2,18 @@ name: Terraform Lint & Validate
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened]
     branches: [ main ]
     paths:
       - 'modules/**'
+      - 'examples/**'
       - '**.tf'
       - '**.hcl'
+      - '.github/workflows/lint.yaml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   lint:
