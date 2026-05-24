@@ -23,15 +23,15 @@ variable "vpc_id" {
 variable "ingress_rules" {
   description = "Lista de regras de entrada"
   type = list(object({
-    from_port                = number
-    to_port                  = number
-    protocol                 = string
-    description              = optional(string)
-    cidr_blocks              = optional(list(string))
-    ipv6_cidr_blocks         = optional(list(string))
-    security_groups          = optional(list(string))
-    prefix_list_ids          = optional(list(string))
-    self                     = optional(bool)
+    from_port        = number
+    to_port          = number
+    protocol         = string
+    description      = optional(string)
+    cidr_blocks      = optional(list(string))
+    ipv6_cidr_blocks = optional(list(string))
+    security_groups  = optional(list(string))
+    prefix_list_ids  = optional(list(string))
+    self             = optional(bool)
   }))
   default = []
 }
@@ -39,15 +39,15 @@ variable "ingress_rules" {
 variable "egress_rules" {
   description = "Lista de regras de saída"
   type = list(object({
-    from_port                = number
-    to_port                  = number
-    protocol                 = string
-    description              = optional(string)
-    cidr_blocks              = optional(list(string))
-    ipv6_cidr_blocks         = optional(list(string))
-    security_groups          = optional(list(string))
-    prefix_list_ids          = optional(list(string))
-    self                     = optional(bool)
+    from_port        = number
+    to_port          = number
+    protocol         = string
+    description      = optional(string)
+    cidr_blocks      = optional(list(string))
+    ipv6_cidr_blocks = optional(list(string))
+    security_groups  = optional(list(string))
+    prefix_list_ids  = optional(list(string))
+    self             = optional(bool)
   }))
   default = [
     {
