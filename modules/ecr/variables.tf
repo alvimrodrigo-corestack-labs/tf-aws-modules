@@ -33,6 +33,12 @@ variable "lifecycle_policy" {
   default     = null
 }
 
+variable "force_delete" {
+  description = "Se verdadeiro, permite que o repositório seja deletado mesmo que contenha imagens."
+  type        = bool
+  default     = false
+}
+
 variable "tags" {
   description = "Tags aplicadas ao repositório"
   type        = map(string)
