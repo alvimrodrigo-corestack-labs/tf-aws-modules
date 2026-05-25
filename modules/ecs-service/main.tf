@@ -29,6 +29,25 @@ resource "aws_iam_role" "task" {
   })
 }
 
+resource "aws_iam_role_policy" "task_secrets" {
+  name = "${var.name}-task-secrets-policy"
+  role = aws_iam_role.task.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action   = [
+          "secretsmanager:GetSecretValue",
+          "secretsmanager:DescribeSecret"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      }
+    ]
+  })
+}
+
 resource "aws_cloudwatch_log_group" "this" {
   name              = "/ecs/${var.name}"
   retention_in_days = 7
