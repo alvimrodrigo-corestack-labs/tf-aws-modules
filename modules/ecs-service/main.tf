@@ -67,13 +67,33 @@ resource "aws_ecs_task_definition" "this" {
   tags = var.tags
 }
 
+resource "aws_iam_role_policy" "task_exec_secrets" {
+  name = "${var.name}-task-exec-secrets-policy"
+  role = aws_iam_role.task_exec.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action   = [
+          "secretsmanager:GetSecretValue",
+          "secretsmanager:DescribeSecret"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      }
+    ]
+  })
+}
+
 resource "aws_ecs_service" "this" {
-  name                   = var.name
-  cluster                = var.cluster_arn
-  task_definition        = aws_ecs_task_definition.this.arn
-  desired_count          = var.desired_count
-  launch_type            = var.launch_type
-  enable_execute_command = var.enable_execute_command
+  name                              = var.name
+  cluster                           = var.cluster_arn
+  task_definition                   = aws_ecs_task_definition.this.arn
+  desired_count                     = var.desired_count
+  launch_type                       = var.launch_type
+  enable_execute_command            = var.enable_execute_command
+  health_check_grace_period_seconds = var.health_check_grace_period_seconds
 
   network_configuration {
     subnets          = var.subnets

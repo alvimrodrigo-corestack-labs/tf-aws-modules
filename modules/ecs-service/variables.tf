@@ -77,6 +77,12 @@ variable "assign_public_ip" {
   default     = false
 }
 
+variable "health_check_grace_period_seconds" {
+  description = "Segundos para ignorar falhas de health check do ALB no startup"
+  type        = number
+  default     = 0
+}
+
 variable "tags" {
   description = "Tags para os recursos do serviço"
   type        = map(string)
